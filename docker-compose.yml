@@ -10,6 +10,7 @@ services:
       - mongo-data:/data/db
 
   auth:
+    image: ${ECR_REGISTRY}/streamingapp-auth:${TAG}
     build:
       context: ./backend/authService
     depends_on:
@@ -27,6 +28,7 @@ services:
       - "${AUTH_PORT:-3001}:3001"
 
   streaming:
+    image: ${ECR_REGISTRY}/streamingapp-streaming:${TAG}
     build:
       context: ./backend
       dockerfile: streamingService/Dockerfile
@@ -47,6 +49,7 @@ services:
       - "${STREAMING_PORT:-3002}:3002"
 
   admin:
+    image: ${ECR_REGISTRY}/streamingapp-admin:${TAG}
     build:
       context: ./backend
       dockerfile: adminService/Dockerfile
@@ -66,6 +69,7 @@ services:
       - "${ADMIN_PORT:-3003}:3003"
 
   chat:
+    image: ${ECR_REGISTRY}/streamingapp-chat:${TAG}
     build:
       context: ./backend
       dockerfile: chatService/Dockerfile
@@ -80,6 +84,7 @@ services:
       - "${CHAT_PORT:-3004}:3004"
 
   frontend:
+    image: ${ECR_REGISTRY}/streamingapp-frontend:${TAG}
     build:
       context: ./frontend
       args:

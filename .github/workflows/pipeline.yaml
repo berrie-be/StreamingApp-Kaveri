@@ -1,0 +1,45 @@
+  name: Flask App CI/CD Pipeline
+  on:
+    push:
+      branches: ["staging"]
+  
+  jobs:
+    buildandpush:
+      runs-on: ubuntu-latest
+      environment: all
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v4
+
+        - name: Use Node.js
+          uses: actions/setup-node@v4
+
+        - name: Install NPM
+        - run: npm install
+
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ap-south-1
+        
+        - name: Login to Amazon ECR
+          id: login-ecr
+          uses: aws-actions/amazon-ecr-login@v1
+
+        - name: Set short commit SHA to image tag
+          id: vars
+          run: echo "IMAGE_TAG=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+
+        - name: Build, tag, and push the image to Amazon ECR
+          id: build-image
+          env:
+            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+            TAG: ${IMAGE_TAG}
+          run: |
+            docker compose build
+            docker compose push
+
+
+
