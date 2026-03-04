@@ -1,5 +1,5 @@
 image:
-    tag: 
+    tag: "b2c10c7"
 
 services:
   - name: auth-service
