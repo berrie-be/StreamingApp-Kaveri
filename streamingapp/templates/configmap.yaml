@@ -1,19 +1,19 @@
 apiVersion: v1
-kind: configMap
+kind: ConfigMap
 metadata:
   name: configmap
 data:
   AUTH_SERVICE_PORT: "3001"
-  MONGO_URI: ""
-  CLIENT_URL: ""
-  AWS_REGION: ""
-  AWS_S3_BUCKET: ""
+  MONGO_URI: "mongodb://mongo-service:27017/streamingapp"
+  CLIENT_URL: "http://localhost:3000"
+  AWS_REGION: "ap-south-2"
+  AWS_S3_BUCKET: "streamingapp-bucket-kaveri"
 
-  ADMIN_SERVICE_PORT: ""
-  CHAT_SERVICE_PORT: ""
-  STREAMING_SERVICE_PORT: ""
+  ADMIN_SERVICE_PORT: "3003"
+  CHAT_SERVICE_PORT: "3004"
+  STREAMING_SERVICE_PORT: "3002"
 
-  STREAMING_PUBLIC_URL: ""
+  STREAMING_PUBLIC_URL: "http://localhost:3002"
   AWS_CDN_URL: ""
 
   REACT_APP_AUTH_API_URL: "http://localhost:3001/api"
