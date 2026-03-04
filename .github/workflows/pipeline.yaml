@@ -3,7 +3,7 @@
     push:
       branches: ["main"]
       paths-ignore:
-        - "streamingapp/values.yaml"
+        - "streamingapp"
 
   permissions:
     contents: write

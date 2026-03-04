@@ -15,7 +15,7 @@ spec:
     spec: 
       containers:
         - name: {{ .name }}
-          image: kaveri21/gratitudeapp:{{ .name }}v1.1
+          image: 588825526719.dkr.ecr.ap-south-2.amazonaws.com/{{ .imagename }}:{{ $.Values.image.tag }}
           ports:
             - containerPort: {{ .port }}
           resources:
