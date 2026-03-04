@@ -1,0 +1,39 @@
+{{- range .Values.services }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}-deployment
+spec: 
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      component: {{ .name }}
+  template:
+    metadata:
+      labels:
+        component: {{ .name }}
+    spec: 
+      containers:
+        - name: {{ .name }}
+          image: kaveri21/gratitudeapp:{{ .name }}v1.1
+          ports:
+            - containerPort: {{ .port }}
+          resources:
+            requests:
+              cpu: {{ .requests.cpu }}
+              memory: {{ .requests.memory }}
+            limits:
+              cpu: {{ .limits.cpu }}
+              memory: {{ .limits.memory }}
+          env:
+          {{- range .env }}
+            - name: {{ .name }}
+              {{- if hasKey . "valueFrom" }}
+              valueFrom:
+{{- toYaml .valueFrom | nindent 16 }}
+              {{- else }}
+              value: {{ .value | quote }}
+              {{- end }}
+          {{- end }}    
+---      
+{{- end }}

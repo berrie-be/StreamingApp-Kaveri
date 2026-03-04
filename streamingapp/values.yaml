@@ -1,3 +1,6 @@
+image:
+    tag: 
+
 services:
   - name: auth-service
     replicaCount: 1
@@ -128,19 +131,6 @@ services:
           configMapKeyRef:
             name: congifmap
             key: CLIENT_URL
-    requests:
-      cpu: "100m"
-      memory: "128Mi"
-    limits:
-      cpu: "300m"
-      memory: "256Mi"
-
-  - name: moods-api
-    replicaCount: 1
-    port: 5002
-    env:
-      - name: MOODS_SERVICE_ADDR
-        value: "moods-service-cluster-ip-service:50052"
     requests:
       cpu: "100m"
       memory: "128Mi"
