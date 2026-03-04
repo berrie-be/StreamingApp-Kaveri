@@ -2,6 +2,11 @@
   on:
     push:
       branches: ["main"]
+      paths-ignore:
+        - "streamingapp/values.yaml"
+
+  permissions:
+    contents: write
   
   jobs:
     buildandpush:
@@ -40,6 +45,27 @@
           run: |
             docker compose build
             docker compose push
+        
+        - name: Update image.tag in k8s/values.yaml using sed
+          run: |
+            set -e
+            FILE="streamingapp/values.yaml"
+
+            # Update tag only inside the 'image:' block
+            sed -i -E '/^image:/,/^[a-zA-Z0-9_-]+:/{s/^([[:space:]]*tag:[[:space:]]*).*/\1"'${IMAGE_TAG}'"/}' "$FILE"
+
+            echo "Updated tag:"
+            grep -n -A2 -B2 '^image:' "$FILE"
+        
+        - name: Commit and push values.yaml change
+          run: |
+            set -e
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            git add k8s/values.yaml
+            git commit -m "chore: bump image tag to ${IMAGE_TAG} [skip ci]" || echo "No changes to commit"
+            git push
 
 
 
