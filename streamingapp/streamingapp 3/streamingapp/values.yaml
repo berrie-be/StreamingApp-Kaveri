@@ -1,13 +1,66 @@
 image:
-  tag: "8bcaa59"
+  tag: "eb2eb4d"
 
 services:
+  - name: auth-service
+    imagename: streamingapp-auth
+    replicaCount: 1
+    port: 3001
+    path: /api/(auth/?.*)
+    servicetype: ClusterIP
+    env:
+      - name: PORT
+        valueFrom:
+          configMapKeyRef:
+            name: configmap
+            key: AUTH_SERVICE_PORT
+      - name: MONGO_URI
+        valueFrom:
+          configMapKeyRef:
+            name: configmap
+            key: MONGO_URI
+      - name: JWT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: secrets
+            key: JWT_SECRET
+      - name: CLIENT_URL
+        valueFrom:
+          configMapKeyRef:
+            name: configmap
+            key: CLIENT_URL
+      - name: AWS_SECRET_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: secrets
+            key: AWS_SECRET_KEY_ID
+      - name: AWS_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: secrets
+            key: AWS_SECRET_ACCESS_KEY
+      - name: AWS_REGION
+        valueFrom:
+          configMapKeyRef:
+            name: configmap
+            key: AWS_REGION
+      - name: AWS_S3_BUCKET
+        valueFrom:
+          configMapKeyRef:
+            name: configmap
+            key: AWS_S3_BUCKET
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+  
   - name: admin-service
     imagename: streamingapp-admin
     replicaCount: 1
     port: 3003
-    targetPort: 3003
-    path: /api/admin
+    path: /api/(admin/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -61,8 +114,7 @@ services:
     imagename: streamingapp-chat
     replicaCount: 1
     port: 3004
-    targetPort: 3004
-    path: /api/chat
+    path: /api/(chat/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -96,8 +148,7 @@ services:
     imagename: streamingapp-streaming
     replicaCount: 1
     port: 3002
-    targetPort: 3002
-    path: /api/streaming
+    path: /api/(streaming/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -156,13 +207,12 @@ services:
     limits:
       cpu: "300m"
       memory: "256Mi"
-  
+
   - name: frontend-service
     imagename: streamingapp-frontend
     replicaCount: 1
     port: 3000
-    targetPort: 80
-    path: /
+    path: /?(.*)
     servicetype: NodePort
     env:
       - name: REACT_APP_AUTH_API_URL

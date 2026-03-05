@@ -1,0 +1,14 @@
+{{- range .Values.services }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}-service
+spec: 
+  type: {{ .servicetype }}
+  selector:
+    component: {{ .name }}
+  ports:
+    - port: {{ .port }}  
+      targetPort: {{ .targetPort }}
+---      
+{{- end }}

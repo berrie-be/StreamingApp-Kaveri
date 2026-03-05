@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   name: ingress-service
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   ingressClassName: nginx
   rules:
@@ -11,10 +12,10 @@ spec:
         paths:
         {{- range .Values.services }}
           - path: {{ .path }}
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ .name }}-service
                 port:
-                  number: {{ .targetPort }}
+                  number: {{ .port }}
         {{- end }} 

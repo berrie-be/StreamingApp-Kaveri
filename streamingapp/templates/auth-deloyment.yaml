@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service-deployment
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      component: auth-service
+  template:
+    metadata:
+      labels:
+        component: auth-service
+    spec: 
+      containers:
+        - name: auth-service
+          image: 588825526719.dkr.ecr.ap-south-2.amazonaws.com/streamingapp-auth:{{ $.Values.image.tag }}
+          ports:
+            - containerPort: 3002
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: AUTH_SERVICE_PORT
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: MONGO_URI
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: JWT_SECRET
+            - name: CLIENT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: CLIENT_URL
+            - name: AWS_SECRET_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: AWS_SECRET_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: AWS_REGION
+            - name: AWS_S3_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: AWS_S3_BUCKET
