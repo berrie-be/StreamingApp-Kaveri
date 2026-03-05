@@ -5,7 +5,7 @@ metadata:
 data:
   AUTH_SERVICE_PORT: "3001"
   MONGO_URI: "mongodb://mongo-service:27017/streamingapp"
-  CLIENT_URL: "http://localhost:3000"
+  CLIENT_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com"
   AWS_REGION: "ap-south-2"
   AWS_S3_BUCKET: "streamingapp-bucket-kaveri"
 
@@ -13,12 +13,12 @@ data:
   CHAT_SERVICE_PORT: "3004"
   STREAMING_SERVICE_PORT: "3002"
 
-  STREAMING_PUBLIC_URL: "http://localhost:3002"
+  STREAMING_PUBLIC_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3002"
   AWS_CDN_URL: ""
 
-  REACT_APP_AUTH_API_URL: "http://localhost:3001/api"
-  REACT_APP_STREAMING_API_URL: "http://localhost:3002/api"
-  REACT_APP_STREAMING_PUBLIC_URL: "http://localhost:3002"
-  REACT_APP_ADMIN_API_URL: "http://localhost:3003/api/admin"
-  REACT_APP_CHAT_API_URL: "http://localhost:3004/api/chat"
-  REACT_APP_CHAT_SOCKET_URL: "http://localhost:3004"
+  REACT_APP_AUTH_API_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3001/api"
+  REACT_APP_STREAMING_API_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3002/api"
+  REACT_APP_STREAMING_PUBLIC_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3002"
+  REACT_APP_ADMIN_API_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3003/api/admin"
+  REACT_APP_CHAT_API_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3004/api/chat"
+  REACT_APP_CHAT_SOCKET_URL: "http://ac53b51f343bb4a329451d29db98b7fd-986298180.ap-south-2.elb.amazonaws.com:3004"

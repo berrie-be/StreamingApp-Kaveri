@@ -6,8 +6,7 @@ services:
     imagename: streamingapp-auth
     replicaCount: 1
     port: 3001
-    targetPort: 3001
-    path: /api/auth(/|$)(.*)
+    path: /api/(auth/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -61,8 +60,7 @@ services:
     imagename: streamingapp-admin
     replicaCount: 1
     port: 3003
-    targetPort: 3003
-    path: /api/admin(/|$)(.*)
+    path: /api/(admin/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -116,8 +114,7 @@ services:
     imagename: streamingapp-chat
     replicaCount: 1
     port: 3004
-    targetPort: 3004
-    path: /api/chat(/|$)(.*)
+    path: /api/(chat/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -151,8 +148,7 @@ services:
     imagename: streamingapp-streaming
     replicaCount: 1
     port: 3002
-    targetPort: 3002
-    path: /api/streaming(/|$)(.*)
+    path: /api/(streaming/?.*)
     servicetype: ClusterIP
     env:
       - name: PORT
@@ -216,8 +212,7 @@ services:
     imagename: streamingapp-frontend
     replicaCount: 1
     port: 3000
-    targetPort: 80
-    path: /()(.*)
+    path: /?(.*)
     servicetype: NodePort
     env:
       - name: REACT_APP_AUTH_API_URL

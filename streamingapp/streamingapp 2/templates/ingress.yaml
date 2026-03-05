@@ -3,8 +3,8 @@ kind: Ingress
 metadata:
   name: ingress-service
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
@@ -17,5 +17,5 @@ spec:
               service:
                 name: {{ .name }}-service
                 port:
-                  number: {{ .targetPort }}
+                  number: {{ .port }}
         {{- end }} 

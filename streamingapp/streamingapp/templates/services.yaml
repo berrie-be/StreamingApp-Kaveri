@@ -9,6 +9,6 @@ spec:
     component: {{ .name }}
   ports:
     - port: {{ .port }}  
-      targetPort: {{ .targetPort }}
+      targetPort: {{ .port }}
 ---      
 {{- end }}
