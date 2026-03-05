@@ -88,12 +88,12 @@ services:
     build:
       context: ./frontend
       args:
-        REACT_APP_AUTH_API_URL: ${REACT_APP_AUTH_API_URL:-http://localhost:3001/api}
-        REACT_APP_STREAMING_API_URL: ${REACT_APP_STREAMING_API_URL:-http://localhost:3002/api}
-        REACT_APP_STREAMING_PUBLIC_URL: ${REACT_APP_STREAMING_PUBLIC_URL:-http://localhost:3002}
-        REACT_APP_ADMIN_API_URL: ${REACT_APP_ADMIN_API_URL:-http://localhost:3003/api/admin}
-        REACT_APP_CHAT_API_URL: ${REACT_APP_CHAT_API_URL:-http://localhost:3004/api/chat}
-        REACT_APP_CHAT_SOCKET_URL: ${REACT_APP_CHAT_SOCKET_URL:-http://localhost:3004}
+        REACT_APP_AUTH_API_URL: ${REACT_APP_AUTH_API_URL:-/api/auth}
+        REACT_APP_STREAMING_API_URL: ${REACT_APP_STREAMING_API_URL:-/api/streaming}
+        REACT_APP_STREAMING_PUBLIC_URL: ${REACT_APP_STREAMING_PUBLIC_URL:-/api/streaming}
+        REACT_APP_ADMIN_API_URL: ${REACT_APP_ADMIN_API_URL:-/api/admin}
+        REACT_APP_CHAT_API_URL: ${REACT_APP_CHAT_API_URL:-/api/chat}
+        REACT_APP_CHAT_SOCKET_URL: ${REACT_APP_CHAT_SOCKET_URL:-/api/chat}
     depends_on:
       - auth
       - streaming
