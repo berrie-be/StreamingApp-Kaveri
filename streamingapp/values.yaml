@@ -1,5 +1,5 @@
 image:
-  tag: "dad6400"
+  tag: "1fb9172"
 
 services:
   - name: auth-service
