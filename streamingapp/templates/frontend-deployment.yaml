@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-service-deployment
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      component: frontend-service
+  template:
+    metadata:
+      labels:
+        component: frontend-service
+    spec:
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: frontend-nginx-config 
+      containers:
+        - name: frontend-service
+          image: 588825526719.dkr.ecr.ap-south-2.amazonaws.com/streamingapp-frontend:{{ $.Values.image.tag }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+          env:
+            - name: REACT_APP_AUTH_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: REACT_APP_AUTH_API_URL
+            - name: REACT_APP_STREAMING_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: REACT_APP_STREAMING_API_URL
+            - name: REACT_APP_STREAMING_PUBLIC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: REACT_APP_STREAMING_PUBLIC_URL
+            - name: REACT_APP_ADMIN_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: REACT_APP_ADMIN_API_URL
+            - name: AREACT_APP_CHAT_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: REACT_APP_CHAT_API_URL
+            - name: REACT_APP_CHAT_SOCKET_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: REACT_APP_CHAT_SOCKET_URL  

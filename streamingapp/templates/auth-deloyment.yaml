@@ -16,7 +16,7 @@ spec:
         - name: auth-service
           image: 588825526719.dkr.ecr.ap-south-2.amazonaws.com/streamingapp-auth:{{ $.Values.image.tag }}
           ports:
-            - containerPort: 3002
+            - containerPort: 3001
           resources:
             requests:
               cpu: "100m"
