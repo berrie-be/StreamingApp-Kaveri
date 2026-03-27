@@ -1,5 +1,5 @@
 image:
-  tag: "3fb0d42"
+  tag: "bfb796f"
 
 services:
   - name: admin-service
