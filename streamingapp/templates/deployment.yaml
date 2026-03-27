@@ -15,7 +15,7 @@ spec:
     spec: 
       containers:
         - name: {{ .name }}
-          image: 588825526719.dkr.ecr.ap-south-2.amazonaws.com/{{ .imagename }}:{{ $.Values.image.tag }}
+          image: 975050024946.dkr.ecr.us-west-1.amazonaws.com/{{ .imagename }}:{{ $.Values.image.tag }}
           ports:
             - containerPort: {{ .port }}
           resources:

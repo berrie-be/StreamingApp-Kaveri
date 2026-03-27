@@ -3,7 +3,7 @@ image:
 
 services:
   - name: admin-service
-    imagename: streamingapp-admin
+    imagename: streamingapp-admin-kaveri
     replicaCount: 1
     port: 3003
     targetPort: 3003
@@ -58,7 +58,7 @@ services:
       memory: "256Mi"
   
   - name: chat-service
-    imagename: streamingapp-chat
+    imagename: streamingapp-chat-kaveri
     replicaCount: 1
     port: 3004
     targetPort: 3004
@@ -93,7 +93,7 @@ services:
       memory: "256Mi"
   
   - name: streaming-service
-    imagename: streamingapp-streaming
+    imagename: streamingapp-streaming-kaveri
     replicaCount: 1
     port: 3002
     targetPort: 3002
