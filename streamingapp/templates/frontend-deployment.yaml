@@ -18,7 +18,7 @@ spec:
             name: frontend-nginx-config 
       containers:
         - name: frontend-service
-          image: 588825526719.dkr.ecr.ap-south-2.amazonaws.com/streamingapp-frontend:{{ $.Values.image.tag }}
+          image: 975050024946.dkr.ecr.us-west-1.amazonaws.com/streamingapp-frontend-kaveri:{{ $.Values.image.tag }}
           ports:
             - containerPort: 80
           volumeMounts:
