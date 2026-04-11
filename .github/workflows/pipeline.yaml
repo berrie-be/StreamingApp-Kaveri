@@ -1,4 +1,4 @@
-  name: Flask App CI/CD Pipeline
+  name: Streaming App CI/CD Pipeline
   on:
     push:
       branches: ["main"]
