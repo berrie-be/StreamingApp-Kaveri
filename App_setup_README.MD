@@ -65,6 +65,10 @@ Images in ECR
 ![alt text](image-13.png)
 
 
+The next step in the CI CD pipeline is to update the latest image tag in the values.yaml file and then push it to the git repository. As the update on the values.yaml is on runner so it needs to be pushed to git.
+
+Here the CI part ends.
+
 
 
 
