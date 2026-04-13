@@ -35,16 +35,20 @@ ECR Repositories created for each service
 
 This step ensures that your local machine or CI/CD environment can securely interact with AWS services such as ECR, S3, and EKS using the AWS CLI.
 
+```
 brew install awscli
 aws --version
 aws configure
+```
 
 Enter the following:
 
+```
 AWS Access Key ID: <YOUR_ACCESS_KEY>
 AWS Secret Access Key: <YOUR_SECRET_KEY>
 Default region name: us-west-1
 Default output format: json
+```
 
 # Step 4: Continuous Integration (CI) using Github Actions
 
@@ -75,25 +79,35 @@ Here the CI part ends.
 
 ### Now create the cluster using the below command (Make sure eksctl is installed)
 
+```
 eksctl create cluster --name <clustername> --region <cluster_region> --nodegroup-name <nodegroupname> --node-type <type_of_the_node(t3.medium)> --nodes <number_of_nodes> --managed --node-ami-family <Imagefornode>
+```
 
 ### Create a namespace for helm using the command
 
+```
 kubectl create namespace helm
+```
 
 ### Install ingress controller in the cluster
 
+```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-
+```
+```
 helm install ingress-nginx ingress-nginx/ingress-nginx \
   --namespace ingress-nginx \
   --create-namespace
+```
 
 ### Create a Helm Chart for your app
 
 For example, for streaming app I used below command
+
+```
 helm create streamingapp
+```
 
 Once you get the folder and the files, create the different manifest files in the templates folder.
 
@@ -105,8 +119,10 @@ Once the manifests files are ready, we can go ahead with deploying the applicati
 
 ### Deploy the Application
 
+```
 helm package .
 helm upgrade --install streamingapp ./streamingapp-1.11.0.tgz -n helm
+```
 
 Validate the resources created in the cluster whether all pods are running, service endpoints are there or not.
 
@@ -126,8 +142,9 @@ Now login using your credentials
 
 To login to the application as ADMIN, follow the below steps.
 First, go to the database pod and change the role of the user you registered with as Admin.
-
+```
 kubectl exec -it <mongo-pod-name> -n helm -- sh
+```
 ![alt text](<Screenshot 2026-04-13 at 8.56.39 PM.png>)
 
 ![alt text](image-19.png)
